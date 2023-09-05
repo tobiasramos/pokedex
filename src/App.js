@@ -8,6 +8,7 @@ function App() {
     <div className="App">
       <h1>Pokedex</h1>
       <PokemonSearch />
+      <p>Lista com os pokemons:</p>
       <Pokemons />
     </div>
   );
