@@ -1,15 +1,15 @@
 import "./App.css";
-import PokemonSearch from "./components/pokemonSearch";
-import Pokemons from "./components/pokemons";
-
+import NavBar from "./components/navBar/navBar";
+import Pokemons from "./components/pokemons/pokemons";
+import PokemonSearch from "./components/pokemonSearch/pokemonSearch";
 
 function App() {
   return (
-    <div className="App">
-      <h1>Pokedex</h1>
+    <div>
+      <NavBar />
       <PokemonSearch />
-      <p>Lista com os pokemons:</p>
-      <Pokemons />
+      <p>Lista com os pokémons:</p>
+      <Pokemons  />
     </div>
   );
 }

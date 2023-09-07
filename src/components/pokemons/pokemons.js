@@ -1,12 +1,12 @@
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useEffect, useState } from "react";
 import { styled } from "styled-components";
 
 const Pokemons = () => {
-  const [pokemon, setPokemon] = useState([]);
+  const [pokemonList, setPokemonList] = useState([]);
 
   useEffect(() => {
-    const apiUrl = "https://pokeapi.co/api/v2/pokemon";
+    const apiUrl = "https://pokeapi.co/api/v2/pokemon?limit=20";
 
     axios
       .get(apiUrl)
@@ -21,7 +21,7 @@ const Pokemons = () => {
           }.png`,
         }));
 
-        setPokemon(pokemonsWithImages);
+        setPokemonList(pokemonsWithImages);
       })
       .catch((error) => {
         console.log("Erro ao consultar a API:", error);
@@ -30,7 +30,7 @@ const Pokemons = () => {
 
   return (
     <PokeContainer>
-      {pokemon.map((poke) => (
+      {pokemonList.map((poke) => (
         <Poke key={poke.id}>
           <img src={poke.image} alt={poke.name} />
           <p>{poke.name}</p>
@@ -63,6 +63,6 @@ const Poke = styled.div`
     border: 1px solid green;
     border-radius: 10px;
   }
-`;
+}`;
 
 export default Pokemons;
