@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { styled } from "styled-components";
 import { getPokemon } from "../../api";
+import { Link } from "react-router-dom";
 
 const Pokemons = () => {
   const [pokemonList, setPokemonList] = useState([]);
@@ -31,21 +32,23 @@ const Pokemons = () => {
   return (
     <PokeContainer>
       {pokemonList.map((poke) => (
-        <Poke key={poke.id}>
-          <img src={poke.image} alt={poke.name} />
-          <p>{poke.name}</p>
-        </Poke>
+         <Link to={`/pokemon/${poke.id}`} key={poke.id}>
+         <Poke>
+           <img src={poke.image} alt={poke.name} />
+           <p>{poke.name}</p>
+         </Poke>
+       </Link>
       ))}
     </PokeContainer>
   );
 };
 
 const PokeContainer = styled.div`
-  border: 2px solid red;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   padding: 10px;
+
 `;
 
 const Poke = styled.div`
@@ -57,10 +60,9 @@ const Poke = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 1px solid blue;
+  box-shadow: 10px 5px 5px #e3e5d7;
 
   img {
-    border: 1px solid green;
     border-radius: 10px;
   }
 }`;

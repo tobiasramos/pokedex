@@ -19,7 +19,6 @@ const PokemonSearch = () => {
       setPokemon(result);
   };
 
-
   return (
     <SearchContainer>
       <input
@@ -31,7 +30,6 @@ const PokemonSearch = () => {
       {pokemon ? (
         <div>
           <h2>{pokemon.name}</h2>
-          <span>Peso:{pokemon.weight}</span>
           <img src={pokemon.sprites.front_default} alt={pokemon.name} />
         </div>
       ) : null}
@@ -49,7 +47,10 @@ const SearchContainer = styled.div`
 
   button {
     cursor: pointer;
-    padding: 8px;
+    padding: 10px;
+    border: none;
+    color: #fff;
+    background-color: #4e5c69;
   }
 `;
 
