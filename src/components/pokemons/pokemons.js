@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { styled } from "styled-components";
+import { getPokemon } from "../../api";
 
 const Pokemons = () => {
   const [pokemonList, setPokemonList] = useState([]);
 
   useEffect(() => {
-    const apiUrl = "https://pokeapi.co/api/v2/pokemon?limit=20";
-
-    axios
-      .get(apiUrl)
-      .then((response) => {
-        const results = response.data.results;
+    const fetchData = async () => {
+      try {
+        const response = await getPokemon();
+        const results = response.results;
 
         const pokemonsWithImages = results.map((poke, index) => ({
           id: index + 1,
@@ -22,10 +20,12 @@ const Pokemons = () => {
         }));
 
         setPokemonList(pokemonsWithImages);
-      })
-      .catch((error) => {
+      } catch (error) {
         console.log("Erro ao consultar a API:", error);
-      });
+      }
+    };
+
+    fetchData();
   }, []);
 
   return (

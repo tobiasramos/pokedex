@@ -1,47 +1,38 @@
-import axios from "axios";
 import { useState } from "react";
 import styled from "styled-components";
+import { searchPokemon } from "../../api";
 
 const PokemonSearch = () => {
   const [search, setSearch] = useState("");
-  const [searchedPokemon, setSearchedPokemon] = useState(null);
+  const [pokemon, setPokemon] = useState(null);
+
+  const onChangeHandle = (e) => {
+    setSearch(e.target.value);
+  };
 
   const handleSearch = () => {
-    if (search.trim() === "") {
-      return;
-    }
-
-    const apiUrl = `https://pokeapi.co/api/v2/pokemon/${search.toLowerCase()}`;
-
-    axios
-      .get(apiUrl)
-      .then((response) => {
-        const data = response.data;
-        const foundPokemon = {
-          id: data.id,
-          name: data.name,
-          image: data.sprites.front_default,
-        };
-        setSearchedPokemon(foundPokemon);
-      })
-      .catch((error) => {
-        console.log("Erro ao consultar a API:", error);
-        setSearchedPokemon(null);
-      });
+    onSearchHandle(search);
   };
+
+  const onSearchHandle = async (pokemon) => {
+      const result = await searchPokemon(pokemon); 
+      setPokemon(result);
+  };
+
 
   return (
     <SearchContainer>
       <input
         placeholder="Digite o nome do Pokémon"
         value={search}
-        onChange={(e) => setSearch(e.target.value)}
+        onChange={onChangeHandle}
       />
       <button onClick={handleSearch}>Buscar</button>
-      {searchedPokemon ? (
+      {pokemon ? (
         <div>
-          <h2>{searchedPokemon.name}</h2>
-          <img src={searchedPokemon.image} alt={searchedPokemon.name} />
+          <h2>{pokemon.name}</h2>
+          <span>Peso:{pokemon.weight}</span>
+          <img src={pokemon.sprites.front_default} alt={pokemon.name} />
         </div>
       ) : null}
     </SearchContainer>
