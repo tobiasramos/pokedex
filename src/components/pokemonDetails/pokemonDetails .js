@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { getPokemonDetails } from "../../api";
 
 
@@ -28,6 +28,7 @@ const PokemonDetails = () => {
     <div>
       <h2>{pokemonDetails.name}</h2>
       <img src={pokemonDetails.image} alt={pokemonDetails.name} />
+      <Link to="..">Voltar</Link>
     </div>
   );
 };
