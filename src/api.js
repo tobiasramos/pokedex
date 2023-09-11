@@ -20,7 +20,9 @@ export const getPokemon = async (limit = 30, offset = 0) => {
 
 export const getPokemonDetails = async (idOrName) => {
   try {
-    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${idOrName}`);
+    const response = await fetch(
+      `https://pokeapi.co/api/v2/pokemon/${idOrName}`
+    );
     if (!response.ok) {
       throw new Error(`Erro ao buscar detalhes do Pokémon: ${response.status}`);
     }
@@ -28,7 +30,9 @@ export const getPokemonDetails = async (idOrName) => {
     const pokemonDetails = {
       id: data.id,
       name: data.name,
-      image: data.sprites.front_default, 
+      image: data.sprites.front_default,
+      height: data.height,
+      weight: data.weight,
     };
     return pokemonDetails;
   } catch (error) {
