@@ -32,12 +32,12 @@ const Pokemons = () => {
   return (
     <PokeContainer>
       {pokemonList.map((poke) => (
-         <Link to={`/pokemon/${poke.id}`} key={poke.id}>
-         <Poke>
-           <img src={poke.image} alt={poke.name} />
-           <p>{poke.name}</p>
-         </Poke>
-       </Link>
+        <Link to={`/pokemon/${poke.id}`} key={poke.id}>
+          <Poke>
+            <img src={poke.image} alt={poke.name} />
+            <p>{poke.name}</p>
+          </Poke>
+        </Link>
       ))}
     </PokeContainer>
   );
@@ -48,7 +48,6 @@ const PokeContainer = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   padding: 10px;
-
 `;
 
 const Poke = styled.div`

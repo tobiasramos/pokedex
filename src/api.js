@@ -33,6 +33,8 @@ export const getPokemonDetails = async (idOrName) => {
       image: data.sprites.front_default,
       height: data.height,
       weight: data.weight,
+      abilities: data.abilities.map((ability) => ability.ability.name),
+      types: data.types.map((type) => type.type.name),
     };
     return pokemonDetails;
   } catch (error) {
