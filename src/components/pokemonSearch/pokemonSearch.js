@@ -1,6 +1,7 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { searchPokemon } from "../../api";
+import { Link } from "react-router-dom";
 
 const PokemonSearch = () => {
   const [search, setSearch] = useState("");
@@ -15,8 +16,8 @@ const PokemonSearch = () => {
   };
 
   const onSearchHandle = async (pokemon) => {
-      const result = await searchPokemon(pokemon); 
-      setPokemon(result);
+    const result = await searchPokemon(pokemon);
+    setPokemon(result);
   };
 
   return (
@@ -29,8 +30,10 @@ const PokemonSearch = () => {
       <button onClick={handleSearch}>Buscar</button>
       {pokemon ? (
         <div>
-          <h2>{pokemon.name}</h2>
-          <img src={pokemon.sprites.front_default} alt={pokemon.name} />
+          <Link to={`/pokemon/${pokemon.id}`}>
+            <h2>{pokemon.name}</h2>
+            <img src={pokemon.sprites.front_default} alt={pokemon.name} />
+          </Link>
         </div>
       ) : null}
     </SearchContainer>
