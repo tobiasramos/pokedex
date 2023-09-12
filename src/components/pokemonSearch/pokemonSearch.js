@@ -6,18 +6,35 @@ import { Link } from "react-router-dom";
 const PokemonSearch = () => {
   const [search, setSearch] = useState("");
   const [pokemon, setPokemon] = useState(null);
+  const [error, setError] = useState(null);
 
   const onChangeHandle = (e) => {
     setSearch(e.target.value);
   };
 
-  const handleSearch = () => {
-    onSearchHandle(search);
+  const handleSearch = async () => {
+    if (search.trim() === "") {
+      setError("O campo de pesquisa está em branco.");
+    } else {
+      onSearchHandle(search);
+    }
   };
 
   const onSearchHandle = async (pokemon) => {
-    const result = await searchPokemon(pokemon);
-    setPokemon(result);
+    try {
+      const result = await searchPokemon(pokemon);
+      setPokemon(result);
+      setError(null); 
+    } catch (err) {
+      setError("Pokémon não encontrado.");
+      setPokemon(null); 
+    }
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
   };
 
   return (
@@ -26,8 +43,10 @@ const PokemonSearch = () => {
         placeholder="Digite o nome do Pokémon"
         value={search}
         onChange={onChangeHandle}
+        onKeyPress={handleKeyPress}
       />
       <button onClick={handleSearch}>Buscar</button>
+      {error ? <ErrorMessage>{error}</ErrorMessage> : null}
       {pokemon ? (
         <div>
           <Link to={`/pokemon/${pokemon.id}`}>
@@ -55,6 +74,11 @@ const SearchContainer = styled.div`
     color: #fff;
     background-color: #4e5c69;
   }
+`;
+
+const ErrorMessage = styled.div`
+  color: red;
+  margin-top: 10px;
 `;
 
 export default PokemonSearch;
