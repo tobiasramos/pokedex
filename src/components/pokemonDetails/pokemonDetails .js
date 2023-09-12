@@ -57,7 +57,7 @@ const PokemonContainer = styled.div`
 const BtnBack = styled(Link)`
   position: absolute;
   top: 0px;
-  left: 15px;
+  left: 5%;
   padding: 5px;
   color: #fff;
   font-weight: bold;
@@ -72,6 +72,10 @@ const Pokemon = styled.div`
   width: 70%;
   margin: 30px auto;
   box-shadow: 10px 5px 5px #e3e5d7;
+
+  @media (max-width: 730px) {
+    flex-direction: column;
+  }
 `;
 
 const Title = styled.h1`
